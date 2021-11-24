@@ -9,7 +9,7 @@ const positionRoute = require('./routes/position.route')
 const MONGO_DB_URI = process.env.MONGO_DB_URI;
 const SERVER_PORT = process.env.SERVER_PORT || 4000;
 
-console.log('Connecting to ' + MONGO_DB_URI);
+console.log('Connecting to database...');
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
