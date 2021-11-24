@@ -3,6 +3,27 @@
   "version": "0.1.0",
   "description": "Crypto asset controller",
   "devDependencies": {
-    "lerna": "^4.0.0"
-  }
+    "eslint": "^8.3.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.4.1"
+  },
+  "main": "src/server/index.js",
+  "scripts": {
+    "dev": "lerna exec -- npm run --parallel dev",
+    "lint": "eslint '**/*.{js,jsx}'",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "lerna run --parallel test",
+    "install": "npm install",
+    "install:all": "npm install && lerna bootstrap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curcumy/curcumy.010"
+  },
+  "author": "LC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/curcumy/curcumy.010/issues"
+  },
+  "homepage": "https://github.com/curcumy/curcumy.010#readme"
 }
