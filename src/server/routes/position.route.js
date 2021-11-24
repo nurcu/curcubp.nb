@@ -2,13 +2,14 @@ const express = require('express'),
   router = express.Router();
 
 // Position Model
-let positionSchema = require('../models/Position');
+let positionSchema = require('../models/position');
 
 // CREATE Position
 router.route('/create-position').post((req, res, next) => {
   positionSchema.create(req.body, (error, data) => {
     if (error) {
-      next(error)
+      next(error);
+      return;
     } else {
       console.log(data)
       res.json(data)
@@ -20,7 +21,8 @@ router.route('/create-position').post((req, res, next) => {
 router.route('/').get((req, res, next) => {
   positionSchema.find((error, data) => {
     if (error) {
-        return next(error)
+        next(error);
+        return;
     } else {
         return res.json(data)
     }
