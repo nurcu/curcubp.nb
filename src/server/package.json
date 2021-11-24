@@ -1,5 +1,5 @@
 {
-  "name": "curcumy.server",
+  "name": "curcumy-server",
   "version": "0.1.0",
   "description": "Curcumy server",
   "main": "index.js",
