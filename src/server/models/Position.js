@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const {ObjectId} = require('mongodb');
+const {ObjectId} = require('mongodb');
 const Schema = mongoose.Schema;
 /*
 const positionId = function(portfolio, protocol, asset){
@@ -9,13 +9,10 @@ const positionId = function(portfolio, protocol, asset){
 */
 
 const positionSchema = new Schema({
-  /* 
-  TBD: redefine id
   _id: {
     type: ObjectId,
-    default: positionId
+    default: function() { return ObjectId(); }
   },
-  */
   portfolio: {
     type: String
   },
