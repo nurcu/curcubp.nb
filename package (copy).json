@@ -2,19 +2,18 @@
   "name": "curcumy",
   "version": "0.1.0",
   "description": "Crypto asset controller",
-  "private": true,
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "lerna": "^4.0.0",
+    "eslint": "^7.11.0",
     "prettier": "^2.4.1"
   },
+  "private": "true",
   "scripts": {
-    "dev": "lerna exec -- yarn run --parallel dev",
+    "dev": "lerna exec -- npm run --parallel dev",
     "lint": "eslint '**/*.{js,jsx}'",
-    "lint:fix": "yarn run lint -- --fix",
+    "lint:fix": "npm run lint -- --fix",
     "test": "lerna run --parallel test",
-    "update": "yarn install",
-    "update:all": "yarn install && lerna bootstrap"
+    "install": "npm install",
+    "install:all": "npm install && lerna bootstrap"
   },
   "repository": {
     "type": "git",
