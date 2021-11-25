@@ -4,8 +4,10 @@ import PositionDataService from "../services/position.service";
 export default class CreatePosition extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangePortfolio = this.onChangePortfolio.bind(this);
     this.onChangeProtocol = this.onChangeProtocol.bind(this);
+    this.onChangeAsset = this.onChangeAsset.bind(this);
+    this.onChangeAssetType = this.onChangeAssetType.bind(this);
     this.savePosition = this.savePosition.bind(this);
     this.newPosition = this.newPosition.bind(this);
 
@@ -13,7 +15,7 @@ export default class CreatePosition extends Component {
       portfolio: '',
       protocol: '',
       asset: '',
-      assetType: ''
+      assetType: 'Token'
     };
   }
 
@@ -98,8 +100,36 @@ export default class CreatePosition extends Component {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="asset">Asset</label>
+              <input
+                type="text"
+                className="form-control"
+                id="asset"
+                required
+                value={this.state.asset}
+                onChange={this.onChangeAsset}
+                name="asset"
+              />
+            </div>
+
+
+            
+            <div className="form-group">
+              <label htmlFor="assetType">Asset Type</label>
+              <input
+                type="text"
+                className="form-control"
+                id="assetType"
+                required
+                value={this.state.assetType}
+                onChange={this.onChangeAssetType}
+                name="assetType"
+              />
+            </div>
+
             <button onClick={this.savePosition} className="btn btn-success">
-              Submit
+              Save
             </button>
           </div>
       </div>

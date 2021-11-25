@@ -9,7 +9,7 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "dev": "lerna exec -- yarn run --parallel dev",
+    "start": "lerna exec -- yarn start --parallel",
     "lint": "eslint '**/*.{js,jsx}'",
     "lint:fix": "yarn run lint -- --fix",
     "test": "lerna run --parallel test",

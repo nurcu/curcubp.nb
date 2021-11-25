@@ -22,7 +22,7 @@ class App extends Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add"} className="nav-link">
+              <Link to={"/create-position"} className="nav-link">
                 Add
               </Link>
             </li>
@@ -30,11 +30,11 @@ class App extends Component {
         </nav>
 
         <div className="container mt-3">
-            <Routes>
-                  <Route exact path="/positions" component={PositionList} />
-                  <Route path="/create-position" component={CreatePosition} />
-                  <Route path="/edit-position/:id" component={EditPosition} />
-            </Routes>
+          <Routes>
+                <Route path="/positions" element={<PositionList/>} />
+                <Route path="/create-position" element={<CreatePosition/>} />
+                <Route path="/edit-position/:id" element={<EditPosition/>} />
+          </Routes>
         </div>
       </div>
     );
