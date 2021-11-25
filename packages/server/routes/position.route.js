@@ -5,7 +5,7 @@ const express = require('express'),
 let positionSchema = require('../models/position');
 
 // CREATE Position
-router.route('/create-position').post((req, res, next) => {
+router.route('/').post((req, res, next) => {
   positionSchema.create(req.body, (error, data) => {
     if (error) {
       next(error);
@@ -30,7 +30,7 @@ router.route('/').get((req, res, next) => {
 })
 
 // Get Single Position
-router.route('/edit-position/:id').get((req, res, next) => {
+router.route('/:id').get((req, res, next) => {
   positionSchema.findById(req.params.id, (error, data) => {
     if (error) {
       next(error)
@@ -42,7 +42,7 @@ router.route('/edit-position/:id').get((req, res, next) => {
 
 
 // Update Position
-router.route('/update-position/:id').put((req, res, next) => {
+router.route('/:id').put((req, res, next) => {
   positionSchema.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, (error, data) => {
@@ -57,7 +57,7 @@ router.route('/update-position/:id').put((req, res, next) => {
 })
 
 // Delete Position
-router.route('/delete-position/:id').delete((req, res, next) => {
+router.route('/:id').delete((req, res, next) => {
   positionSchema.findByIdAndRemove(req.params.id, (error, data) => {
     if (error) {
        next(error);

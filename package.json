@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/curcumy/curcumy.010"
+    "url": "git+https://github.com/curcumy/curcumy"
   },
   "author": "LC",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/curcumy/curcumy.010/issues"
+    "url": "https://github.com/curcumy/curcumy/issues"
   },
-  "homepage": "https://github.com/curcumy/curcumy.010#readme"
+  "homepage": "https://github.com/curcumy/curcumy#readme"
 }
