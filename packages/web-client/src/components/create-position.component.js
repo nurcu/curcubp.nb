@@ -1,97 +1,108 @@
-import React, {Component} from "react";
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+import React, { Component } from "react";
+import PositionDataService from "../services/position.service";
 
 export default class CreatePosition extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeProtocol = this.onChangeProtocol.bind(this);
+    this.savePosition = this.savePosition.bind(this);
+    this.newPosition = this.newPosition.bind(this);
 
-    // Setting up functions
-    this.onChangePositionPortfolio = this.onChangePositionPortfolio.bind(this);
-    this.onChangePositionProtocol = this.onChangePositionProtocol.bind(this);
-    this.onChangePositionAsset = this.onChangePositionAsset.bind(this);
-    this.onChangePositionAssetType = this.onChangePositionAssetType.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
-    // Setting up state
     this.state = {
       portfolio: '',
       protocol: '',
       asset: '',
       assetType: ''
-    }
+    };
   }
 
-  onChangePositionPortfolio(e) {
+  onChangePortfolio(e) {
     this.setState({portfolio: e.target.value})
   }
 
-  onChangePositionProtocol(e) {
+  onChangeProtocol(e) {
     this.setState({protocol: e.target.value})
   }
 
-  onChangePositionAsset(e) {
+  onChangeAsset(e) {
     this.setState({asset: e.target.value})
   }
 
-  onChangePositionAssetType(e) {
+  onChangeAssetType(e) {
     this.setState({assetType: e.target.value})
   }
 
-  onSubmit(e) {
-    e.preventDefault()
 
-    const positionObject = {
+  savePosition() {
+
+    const data = {
       portfolio: this.state.portfolio,
       protocol: this.state.protocol,
-      asset: this.state.asset
+      asset: this.state.asset,
+      assetType: this.state.assetType
     };
-    axios.post('http://localhost:4000/positions/create-position', positionObject)
-      .then(res => console.log(res.data));
 
+    PositionDataService.create(data)
+      .then(response => {
+        this.setState({
+          portfolio: response.data.portfolio,
+          protocol: response.data.protocol,
+          asset: response.data.asset,
+          assetType: response.data.assetType
+        });
+        console.log(response.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
-
-    console.log(`Position successfully created!`);
-    console.log(`Portfolio: ${this.state.portfolio}`);
-    console.log(`Protocol: ${this.state.protocol}`);
-    console.log(`Asset: ${this.state.asset}`);
-
-    this.setState({portfolio: '', protocol: '', asset: '', assetType: ''})
+  newPosition() {
+    this.setState({
+      portfolio: "",
+      protocol: "",
+      asset: "",
+      assetType: "token"
+    });
   }
 
   render() {
-    return (<div class="form-wrapper">
-      <Form>
-        <Form.Group controlId="Portfolio">
-          <Form.Label>Portfolio</Form.Label>
-          <Form.Control type="text"/>
-        </Form.Group>
+    return (
+      <div className="submit-form">
+        
+          <div>
+            <div className="form-group">
+              <label htmlFor="portfolio">Portfolio</label>
+              <input
+                type="text"
+                className="form-control"
+                id="portfolio"
+                required
+                value={this.state.portfolio}
+                onChange={this.onChangePortfolio}
+                name="portfolio"
+              />
+            </div>
 
-        <Form.Group controlId="Protocol">
-          <Form.Label>Protocol</Form.Label>
-          <Form.Control type="text"/>
-        </Form.Group>
+            <div className="form-group">
+              <label htmlFor="protocol">Protocol</label>
+              <input
+                type="text"
+                className="form-control"
+                id="protocol"
+                required
+                value={this.state.protocol}
+                onChange={this.onChangeProtocol}
+                name="protocol"
+              />
+            </div>
 
-        <Form.Group controlId="Asset">
-          <Form.Label>Asset</Form.Label>
-          <Form.Control type="text"/>
-        </Form.Group>
-
-        <Form.Group controlId="AssetType">
-          <Form.Label>Asset Type</Form.Label>
-          <Form.Select aria-label="Asset type">
-            <option>Open this select menu</option>
-            <option value="token">Token</option>
-            <option value="pool">Pool</option>
-          </Form.Select>
-        </Form.Group>
-
-        <Button variant="danger" size="lg" block="block" type="submit">
-          Create Position
-        </Button>
-      </Form>
-    </div>);
+            <button onClick={this.savePosition} className="btn btn-success">
+              Submit
+            </button>
+          </div>
+      </div>
+    );
   }
 }
