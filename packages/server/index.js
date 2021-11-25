@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cors());
-app.use('/positions', positionRoute)
+app.use('/api/positions', positionRoute)
 
 
 app.listen(SERVER_PORT, () => {
