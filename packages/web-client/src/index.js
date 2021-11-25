@@ -13,18 +13,3 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-
-/* report vitals?
-import reportWebVitals from './reportWebVitals';
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-reportWebVitals();
-
-
-import * as serviceWorker from "./serviceWorker";
-serviceWorker.unregister();
-*/

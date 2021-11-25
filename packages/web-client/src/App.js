@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
+import { GlobalProvider } from "../components/context/GlobalState";
 
 import CreatePosition from "./components/create-position.component";
 import EditPosition from "./components/edit-position.component";
@@ -13,7 +14,7 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <a href="/positions" className="navbar-brand">
-            curcumy
+            Curcumy
           </a>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -30,11 +31,14 @@ class App extends Component {
         </nav>
 
         <div className="container mt-3">
-          <Routes>
-                <Route exact path="/positions" component={PositionList} />
-                <Route path="/create-position" component={CreatePosition} />
-                <Route path="/edit-position/:id" component={EditPosition} />
-          </Routes>
+
+          <GlobalProvider>
+            <Routes>
+                  <Route exact path="/positions" component={PositionList} />
+                  <Route path="/create-position" component={CreatePosition} />
+                  <Route path="/edit-position/:id" component={EditPosition} />
+            </Routes>
+          </GlobalProvider>
         </div>
       </div>
     );
