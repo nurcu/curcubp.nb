@@ -1,17 +1,8 @@
 const mongoose = require('mongoose');
 const {ObjectId} = require('mongodb');
 const Schema = mongoose.Schema;
-/*
-const positionId = function(portfolio, protocol, asset){
-    return new ObjectId();
-}
-*/
 
 const positionSchema = new Schema({
-  _id: {
-    type: ObjectId,
-    default: function() { return ObjectId(); }
-  },
   portfolio: {
     type: String,
     required: true
@@ -33,5 +24,7 @@ const positionSchema = new Schema({
   }
 }
 );
+
+positionSchema.index({portfolio: 1, protocol: 1, asset: 1}, {unique: true});
 
 module.exports = mongoose.model('positions', positionSchema);

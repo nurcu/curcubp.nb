@@ -22,27 +22,29 @@ mongoose.connect(MONGO_DB_URI, {
     console.error('Could not connect to database:', error)
   }
 )
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+// Backend portal
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(cors());
-app.use('/api/positions', positionRoute)
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+app.use(bodyParser.json());
+
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/info.html');
+});
+
+app.use('/positions', positionRoute);
+
+app.use((req, res) => {
+  res.status(404).send('Generic error');
+});
 
 app.listen(SERVER_PORT, () => {
   console.log('Connected to port', SERVER_PORT)
 })
-
-// 404 Error
-app.use((req, res, next) => {
-  next(new SyntaxError(404));
-});
-
-app.use(function (err, req, res, next) {
-  console.error('Server error:', err.message);
-  if (!err.statusCode) err.statusCode = 500;
-  res.status(err.statusCode).send(err.message);
-});

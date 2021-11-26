@@ -2,71 +2,63 @@ const express = require('express');
 const router = express.Router();
 
 // Position Model
-let positionSchema = require('../models/position');
+const positionSchema = require('../models/position');
+
+const sendData = (res, err, data) => {
+    if (err) {
+        return res.status(500).json({ success: false, error: err })
+    }else {
+        return res.status(200).json({ success: true, data: data })
+    }
+}
+const sendId = (res, err, data) => {
+    if (err) {
+        return res.status(500).json({ success: false, error: err })
+    } else if (!data) {
+        return res.status(404).json({ success: false, error: "No data found." })
+    } else {
+        return res.status(200).json({ success: true, id: data._id })
+    }
+}
+
 
 // CREATE Position
-router.route('/').post((req, res, next) => {
-  positionSchema.create(req.body, (error, data) => {
-    if (error) {
-      next(error);
-      return;
-    } else {
-      console.log(data)
-      res.json(data)
-    }
+router.post('/', (req, res) => {
+  positionSchema.create(req.body, (err, data) => {
+      return sendId(res, err, data);
   })
 });
 
 // READ Positions
-router.route('/').get((req, res, next) => {
-  positionSchema.find((error, data) => {
-    if (error) {
-        next(error);
-        return;
-    } else {
-        return res.json(data)
-    }
+router.get('/', (req, res, next) => {
+  positionSchema.find((err, data) => {
+    return sendData(res, err, data);
   })
-})
+});
 
 // Get Single Position
-router.route('/:id').get((req, res, next) => {
-  positionSchema.findById(req.params.id, (error, data) => {
-    if (error) {
-      next(error)
-    } else {
-      res.json(data)
-    }
+router.get('/:id', (req, res) => {
+  positionSchema.findById(req.params.id, (err, data) => {
+    return sendData(res, err, data);
   })
-})
+});
 
 
 // Update Position
-router.route('/:id').put((req, res, next) => {
+router.put('/:id', (req, res) => {
   positionSchema.findByIdAndUpdate(req.params.id, {
     $set: req.body
-  }, (error, data) => {
-    if (error) {
-        console.log(error);
-        next(error);
-    } else {
-        res.json(data)
-        console.log('Position updated successfully !')
-    }
+  }, (err, data) => {
+    return sendId(res, err, data);
   })
 })
 
 // Delete Position
-router.route('/:id').delete((req, res, next) => {
-  positionSchema.findByIdAndRemove(req.params.id, (error, data) => {
-    if (error) {
-       next(error);
-    } else {
-      res.status(200).json({
-        msg: data
-      })
-    }
+router.delete('/:id', (req, res) => {
+  positionSchema.findByIdAndRemove(req.params.id, (err, data) => {
+    return sendId(res, err, data);
   })
 })
+
 
 module.exports = router;
