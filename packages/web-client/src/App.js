@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
 
-import CreatePosition from "./components/create-position.component";
-import EditPosition from "./components/edit-position.component";
-import PositionList from "./components/position-list.component";
+import CreatePosition from "./pages/AddPosition";
+import EditPosition from "./pages/EditPosition";
+import PositionList from "./pages/PositionList";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
